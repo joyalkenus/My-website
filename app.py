@@ -56,7 +56,7 @@ with open(certificate_file,"rb") as c:
     certificate=c.read()
 profile_pic = Image.open(dp_file)
 project_img1= Image.open("assets/face_project.jpg")
-project2_img = Image.open('assets/bionic_project.jpg')
+project2_img = Image.open('assets/Bionic_project.jpg')
 project3_img = Image.open('assets/warehouse_project.jpg')
 project4_img = Image.open('assets/quadro.jpg')
 git_repo_url = "https://github.com/joyalkenus/Semi-autonomous-driving-system"
