@@ -11,7 +11,7 @@ curr_dir= Path(__file__).parent if"__file__" in locals() else Path.cwd()
 css_file = "styles/main.css"
 resume_file = "assets/cv.pdf"
 warehouse_file="assets/Warehouse_management_report.docx"
-dp_file = "assets/dp.png"
+dp_file = "assets/dp1.jpg"
 certificate_file="assets/certificate.pdf"
 
 
