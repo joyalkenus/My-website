@@ -1,5 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans&family=Readex+Pro:wght@200;300;400&display=swap');
+*{
+    font-family: 'Readex Pro';
+}
 img{
     padding: auto;
     position: relative;
     box-shadow:  rgba(0,0,0,0.6);
 }
+
+a{
+    text-decoration: none;
+    color: whitesmoke;
+    font-weight: 500;
+
+}
+{
+    background-color: aqua;
+}
+ul{
+    list-style-type: none;
+}
+a:hover{
+    color:aqua !important;
+    text-decoration: none;
+}
+#MainMenu {visibility: none;}
+footer{visibility: hidden;}
+header{visibility: hidden;}
