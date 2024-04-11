@@ -11,7 +11,7 @@ import webbrowser
 #--- path settings
 curr_dir= Path(__file__).parent if"__file__" in locals() else Path.cwd()
 css_file = "styles/main.css"
-resume_file = "assets/cv.docx.pdf"
+resume_file = "assets/JK_Resume_.docx (2).pdf"
 warehouse_file="assets/Warehouse_management_report.docx"
 dp_file = "assets/dp.png"
 certificate_file="assets/certificate.pdf"
