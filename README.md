@@ -18,8 +18,4 @@ Hi there! 👋 Welcome to the GitHub repository of my portfolio website built us
 - PIL (Python Imaging Library): For image processing tasks.
 - Other Python libraries: `requests`, `pathlib`, and more for various functionalities.
 
-## Setup and Customize for your portfolio.🛠️
 
-1. Clone the repository to your local machine.
-   ```bash
-   git clone https://github.com/yourgithubusername/portfolio-website.git
