@@ -1,6 +1,6 @@
 # Welcome to My Portfolio Website 🌟
 
-Hi there! 👋 Welcome to the GitHub repository of my portfolio website built using Python and Streamlit. This project showcases my skills, projects, and qualifications as a Mechatronics Engineer and Data Analyst.
+Hi there! 👋 Welcome to the GitHub repository of my portfolio website built using Python and Streamlit. This project showcases my skills, projects, and qualifications as a Mechatronics Engineer and Deep learning expert.
 
 ## Features 🚀
 
