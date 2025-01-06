@@ -11,7 +11,7 @@ curr_dir = Path(__file__).parent if "__file__" in locals() else Path.cwd()
 css_file = "styles/main.css"
 
 # -- Update these filenames with your new CV info
-resume_file = "assets/JK_compact.pdf"  
+resume_file = "assets/JK_compact.pdf"
 warehouse_file = "assets/Warehouse_management_report.docx"
 dp_file = "assets/dp.png"
 certificate_file = "assets/certificate.pdf"
@@ -31,11 +31,12 @@ social_media = {
 
 # -- Basic Portfolio Settings
 TITLE = "WELCOME TO MY PORTFOLIO"
-ICON  = ":wave:"
-# Update with your new details:
-NAME  = "I'm JOYAL KENUS"
+ICON = ":wave:"
+NAME = "I'm JOYAL KENUS"
 DESCRIPTION = """Machine Learning and Robotics Engineer"""
 EMAIL = "joyalkenus2711@gmail.com"
+PHONE = "+44 7859 798421"
+ADDRESS = "1 Cedar Drive, Edenbridge, TN8 5JN, United Kingdom"
 
 # -- Streamlit Page Config
 st.set_page_config(page_title=TITLE, page_icon=ICON, layout="wide")
@@ -66,23 +67,22 @@ git_repo_url = "https://github.com/joyalkenus/Semi-autonomous-driving-system"
 
 # -- Load Lottie animations
 lottie_coding = load_lottieurl(LOTTIE_CODING_URL)
-lottie_qual   = load_lottieurl(LOTTIE_QUAL_URL)
-lottie_hi     = load_lottieurl(LOTTIE_HI_URL)
-lottie_spark  = load_lottieurl(LOTTIE_SPARKLES)
+lottie_qual = load_lottieurl(LOTTIE_QUAL_URL)
+lottie_hi = load_lottieurl(LOTTIE_HI_URL)
+lottie_spark = load_lottieurl(LOTTIE_SPARKLES)
 
 # -- Sidebar
 with st.sidebar:
     selected = option_menu(
         menu_title=None,
-        options=["Home", "Qualifications", "Projects", "Contact"],
-        icons=["house", "award", "person-workspace", "envelope-fill"],
+        options=["Home", "Qualifications", "Projects", "Experience", "Contact"],
+        icons=["house", "award", "person-workspace", "briefcase", "envelope-fill"],
         menu_icon="cast",
         default_index=0
     )
 
 # --------------------- HOME ---------------------
 if selected == "Home":
-    # Gently greet the user and show your new info
     col1, col2 = st.columns((1, 2), gap="medium")
 
     with col1:
@@ -91,22 +91,24 @@ if selected == "Home":
     with col2:
         st.title("Hi :wave:,")
         st.title(NAME)
-        st.subheader("Roboticist and Data Analyst")
+        st.subheader("Machine learning and Robotics Engineer")
         st.write(
-            "Um... welcome to my portfolio! I'm so happy you're here. "
-            "I'm a Machine Learning and Robotics enthusiast—honestly, "
-            "it’s a deep passion of mine. I like to create robust robotic "
+            "Welcome to my portfolio! "
+            "I'm a Machine Learning and Robotics engineer, "
+            "It’s a deep passion of mine. I like to create robust robotic "
             "systems and deploy sophisticated ML models in the real world."
         )
 
         st.download_button(
-            label="Take a look at my updated CV",
+            label="Take a look at my CV",
             data=PDFbyte,
             file_name="JK_compact.pdf",
             mime="application/octet-stream",
         )
 
-        st.write("📧:", EMAIL)
+        st.write(f"**Phone**: {PHONE}")
+        st.write(f"**Email**: {EMAIL}")
+        st.write(f"**Address**: {ADDRESS}")
         st.write("##")
         st.write("Let’s stay connected on these platforms:")
         # Social links
@@ -254,6 +256,128 @@ if selected == "Projects":
         )
         st.video("https://www.youtube.com/watch?v=Cn-CBeOi3Cc")
 
+# --------------------- EXPERIENCE (New Page) ---------------------
+if selected == "Experience":
+    st.header("My Experience & Additional Details")
+    st.write("Um, let’s dive deeper into my background, shall we? Breathe...")
+
+    # -- Quick profile highlight
+    st.subheader("Profile")
+    st.write("**Joyal Kenus**")
+    st.write("Machine Learning Engineer")
+    st.write(f"**Phone**: {PHONE}")
+    st.write(f"**Email**: {EMAIL}")
+    st.write(f"**Address**: {ADDRESS}")
+    st.write(f"**LinkedIn**: {social_media['LinkedIn']}")
+    st.write("---")
+
+    # -- Summary
+    st.subheader("SUMMARY")
+    st.markdown(
+        "Machine Learning Engineer with proven expertise in developing emotion "
+        "recognition systems and deploying production-scale AI solutions. Demonstrated "
+        "track record in architecting and optimizing transformer-based models, with "
+        "a focus on synthetic data generation and scalable ML pipelines. Experienced "
+        "in implementing deep learning frameworks including PyTorch for real-world "
+        "applications in computer vision and human-AI interaction. Consistently delivers "
+        "innovative solutions by combining technical expertise in model architecture "
+        "design with practical implementation strategies. Notable achievements include "
+        "developing real-time facial recognition systems and contributing to cutting-edge "
+        "emotion AI research at Onairos. Strong foundation in both theoretical ML concepts "
+        "and hands-on engineering, with experience in end-to-end ML workflow optimization "
+        "and deployment."
+    )
+
+    # -- Work Experience
+    st.write("---")
+    st.subheader("WORK EXPERIENCE")
+
+    # Onairos
+    st.markdown("**Machine Learning Engineer, At Onairos, London, United Kingdom**")
+    st.write("Oct 2024 - Present")
+    st.markdown(
+        """
+        - **Research and Development**: Assisting with cutting-edge AI emotion model research.  
+        - **Emotion Model Development**: Contributed to advanced emotion recognition models.  
+        - **Model Training**: Prepared and trained new AI models with dataset filtering and manipulation.  
+        - **Synthetic Data Generation**: Developed systems for synthetic data labeling to enhance dataset quality.  
+        - **Implementation**: Utilized PyTorch, transformer models, MLPs, and neural networks.  
+        - **Algorithm Optimization**: Improved model performance with effective tuning.  
+        - **Data Preprocessing**: Cleaned, normalized, and augmented data for training.  
+        - **Version Control**: Employed Git for seamless collaboration.
+        """
+    )
+
+    # Freelance Upwork
+    st.markdown("**AI Integration Specialist, Freelance in Upwork, London, United Kingdom**")
+    st.write("May 2024 - Sep 2024")
+    st.markdown(
+        """
+        - **GPT Integration**: Implemented custom GPT solutions for small/medium businesses.  
+        - **API Development**: Created robust APIs to integrate GPT models with existing systems.  
+        - **Software Development**: Built personalized software leveraging AI.  
+        - **Scalability Planning**: Designed AI solutions for future business growth.  
+        - **Client Education**: Guided businesses on leveraging GPT tech.  
+        - **Communication**: Ensured clear deliverables and frequent updates.
+        """
+    )
+
+    # -- Education
+    st.write("---")
+    st.subheader("EDUCATION")
+    st.markdown(
+        """
+        **University of Central Lancashire, Preston, United Kingdom**  
+        Master of Science, Mechatronics and Intelligent Machines — GPA: 4.0  
+        *Jan 2021 - Jul 2022*
+
+        **Nehru Institute of Engineering and Technology, Coimbatore, India**  
+        Bachelor of Engineering, Mechatronics Engineering — GPA: 3.4  
+        *Jun 2016 - Jul 2020*
+        """
+    )
+
+    # -- Additional Projects
+    st.write("---")
+    st.subheader("ADDITIONAL PROJECTS")
+    st.markdown(
+        """
+        - **Semi-Autonomous Face Orientation Controlled Wheelchair Driving System**  
+          Developed a Facial orientation recognition system with OpenCV, tested on an Arduino robotic car.  
+          Integrated powertrain calibration techniques for varying commands and an obstacle avoidance system.  
+          Constructed a WeBots 3D simulation for precision confirmation.
+        
+        - **Eva – On-demand Personal Yoga Companion**  
+          Developed a fully functional web app providing real-time feedback on yoga poses.  
+          Used ElevenLabs for voice, a Custom Google Search Engine for poses, and Gemini 1.5 pro for vision.
+        
+        - **AI Skill Analyser for Reputy.io**  
+          Designed a soft skill analyser from scraped social media data.  
+          Implemented Retrieval Augmented Generation (RAG) with Multimodal GPT to extract talent.
+        
+        - **Bionic Hand for Handicapped to Ride a Motorbike**  
+          Engineered a prototype bionic hand enabling disabled individuals to control motorbike acceleration.  
+          Linked bicep rotations to the bike's accelerator for accessible control.
+        """
+    )
+
+    # -- Skills
+    st.write("---")
+    st.subheader("SKILLS")
+    st.markdown(
+        """
+        - **Programming**: Python, JavaScript, C++  
+        - **Data Tools**: SQL, Tableau, Power BI  
+        - **Machine Learning**: PyTorch, MLOps, Data Pipelines, TensorFlow, Keras, Scikit-Learn  
+        - **Technologies**: Arduino, MATLAB, OpenCV  
+        - **Robotics**: Microcontrollers, Embedded systems, PLC, Pneumatic systems, Path Planning  
+        - **Cloud**: AWS, Azure, GCP
+        """
+    )
+
+    st.write("---")
+    st.success("That’s the full scoop on my background. Thanks for reading!")    
+
 # --------------------- CONTACT ---------------------
 if selected == "Contact":
     st.header("Get in Touch :handshake:")
@@ -290,5 +414,5 @@ if selected == "Contact":
     st.write("##")
     st.write(
         "Thank you so much for dropping by! "
-        "Breathe, um, and have a wonderful day."
+        "Have a wonderful day."
     )
