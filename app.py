@@ -11,7 +11,7 @@ curr_dir = Path(__file__).parent if "__file__" in locals() else Path.cwd()
 css_file = "styles/main.css"
 
 # -- Update these filenames with your new CV info
-resume_file = "assets/NEW_JK_Resume.pdf"  
+resume_file = "assets/JK_compact.pdf"  
 warehouse_file = "assets/Warehouse_management_report.docx"
 dp_file = "assets/dp.png"
 certificate_file = "assets/certificate.pdf"
