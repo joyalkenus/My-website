@@ -1,255 +1,294 @@
-from pathlib import Path
 import streamlit as st
+from pathlib import Path
 import requests
 from PIL import Image
 from streamlit_lottie import st_lottie
 from streamlit_option_menu import option_menu
 import webbrowser
 
-
-
-#--- path settings
-curr_dir= Path(__file__).parent if"__file__" in locals() else Path.cwd()
+# -- Path settings
+curr_dir = Path(__file__).parent if "__file__" in locals() else Path.cwd()
 css_file = "styles/main.css"
-resume_file = "assets/JK_Resume_.docx (2).pdf"
-warehouse_file="assets/Warehouse_management_report.docx"
+
+# -- Update these filenames with your new CV info
+resume_file = "assets/NEW_JK_Resume.pdf"  
+warehouse_file = "assets/Warehouse_management_report.docx"
 dp_file = "assets/dp.png"
-certificate_file="assets/certificate.pdf"
+certificate_file = "assets/certificate.pdf"
 
+# -- Additional Lottie animations (optional). 
+#    Add or replace these with other fun animations from lottiefiles.com
+LOTTIE_CODING_URL = "https://assets5.lottiefiles.com/packages/lf20_1LhsaB.json"
+LOTTIE_QUAL_URL   = "https://assets9.lottiefiles.com/packages/lf20_stozcwgt.json"
+LOTTIE_HI_URL     = "https://assets10.lottiefiles.com/packages/lf20_m9fz64i8.json"
+LOTTIE_SPARKLES   = "https://assets9.lottiefiles.com/packages/lf20_w51pcehl.json"
 
-# For inseritng animation we use Lottie
+# -- Social Media
+social_media = {
+    "LinkedIn": "https://www.linkedin.com/in/joyal-kenus-7aa6b21b9/",
+    "GitHub": "https://github.com/joyalkenus"
+}
 
+# -- Basic Portfolio Settings
+TITLE = "WELCOME TO MY PORTFOLIO"
+ICON  = ":wave:"
+# Update with your new details:
+NAME  = "I'm JOYAL KENUS"
+DESCRIPTION = """Machine Learning and Robotics Engineer"""
+EMAIL = "joyalkenus2711@gmail.com"
 
+# -- Streamlit Page Config
+st.set_page_config(page_title=TITLE, page_icon=ICON, layout="wide")
+
+# -- Utility function: load Lottie animation from a URL
 def load_lottieurl(url):
     r = requests.get(url)
-    if r.status_code!= 200:
+    if r.status_code != 200:
         return None
     return r.json()
 
+# -- Load external resources
+with open(css_file) as f:
+    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-
-
-
-
-#----Page Variables----
-TITLE= " WELCOME TO MY PORTFOLIO"
-ICON=":wave:"
-name = "I'm JOYAL KENUS"
-description =""" Mechatronics Engineer and Data analyst   """
-email="joyalkenus2711@gmail.com"
-social_media={
-    "Linkedin": "https://www.linkedin.com/in/joyal-kenus-7aa6b21b9/",
-    "Github" :"https://github.com/joyalkenus"
-}
-
-
-st.set_page_config(page_title=TITLE, page_icon=ICON,layout="wide")
-
-
-
-
-
-#---------lOAD CSS , PDF & PROFILE PI
-with open('styles/main.css') as f:
-    st.markdown(f'<style>{f.read()}</style>',unsafe_allow_html=True)
 with open(resume_file, "rb") as pdf_file:
     PDFbyte = pdf_file.read()
-with open(certificate_file,"rb") as c:
-    certificate=c.read()
+
+with open(certificate_file, "rb") as c:
+    certificate = c.read()
+
 profile_pic = Image.open(dp_file)
-project_img1= Image.open("assets/face_project.jpg")
-project2_img = Image.open('assets/Bionic_project.jpg')
-project3_img = Image.open('assets/warehouse_project.jpg')
-project4_img = Image.open('assets/quadro.jpg')
+project_img1 = Image.open("assets/face_project.jpg")
+project2_img = Image.open("assets/Bionic_project.jpg")
+project3_img = Image.open("assets/warehouse_project.jpg")
+project4_img = Image.open("assets/quadro.jpg")
 git_repo_url = "https://github.com/joyalkenus/Semi-autonomous-driving-system"
 
-#load assets
-lottie_coding = load_lottieurl("https://assets5.lottiefiles.com/packages/lf20_1LhsaB.json")
-lottie_qual = load_lottieurl(
-    "https://assets9.lottiefiles.com/packages/lf20_stozcwgt.json")
-lottie_hi = load_lottieurl(
-    "https://assets10.lottiefiles.com/packages/lf20_m9fz64i8.json")
+# -- Load Lottie animations
+lottie_coding = load_lottieurl(LOTTIE_CODING_URL)
+lottie_qual   = load_lottieurl(LOTTIE_QUAL_URL)
+lottie_hi     = load_lottieurl(LOTTIE_HI_URL)
+lottie_spark  = load_lottieurl(LOTTIE_SPARKLES)
 
-# ----- -------------------------------------------------------------LOAD SIDE BAR
+# -- Sidebar
 with st.sidebar:
     selected = option_menu(
-        menu_title= None,
-        options=["Home","Qualifications","Projects"],
-        icons=["house","award","person-workspace"],
+        menu_title=None,
+        options=["Home", "Qualifications", "Projects", "Contact"],
+        icons=["house", "award", "person-workspace", "envelope-fill"],
         menu_icon="cast",
         default_index=0
     )
 
-
-
-
+# --------------------- HOME ---------------------
 if selected == "Home":
-    #------------------------------------------------------------------Main Section -----
+    # Gently greet the user and show your new info
     col1, col2 = st.columns((1, 2), gap="medium")
-    with col1:
-        st.image(dp_file)
-    with col2:
-        
-        st.title("Hi :wave:,")
-        st.title(name)
-        st.subheader("Roboticist and Data Analyst")
-        st.write("As a professional with expertise in robotics and data analysis, I am deeply committed to leveraging my skill set towards the creation of robust robotic systems and sophisticated machine learning models. My passion lies in identifying innovative avenues to apply these skills in pursuit of these goals. ")
-        st.download_button(
-            label="Take a look at my CV",
-            data=PDFbyte,
-            file_name=resume_file,
-            mime="application/octet-stream",
 
+    with col1:
+        st.image(profile_pic, width=230)
+
+    with col2:
+        st.title("Hi :wave:,")
+        st.title(NAME)
+        st.subheader("Roboticist and Data Analyst")
+        st.write(
+            "Um... welcome to my portfolio! I'm so happy you're here. "
+            "I'm a Machine Learning and Robotics enthusiast—honestly, "
+            "it’s a deep passion of mine. I like to create robust robotic "
+            "systems and deploy sophisticated ML models in the real world."
         )
-        st.write("📧:", email)
-        #--- social links
+
+        st.download_button(
+            label="Take a look at my updated CV",
+            data=PDFbyte,
+            file_name="NEW_JK_Resume.pdf",
+            mime="application/octet-stream",
+        )
+
+        st.write("📧:", EMAIL)
         st.write("##")
+        st.write("Let’s stay connected on these platforms:")
+        # Social links
         cols = st.columns(len(social_media))
         for index, (platform, link) in enumerate(social_media.items()):
             cols[index].write(f"[{platform}]({link})")
 
+    # A mini “sparkles” or greeting animation
+    st.write("---")
+    st_lottie(lottie_spark, height=120, key="hi_there")
 
-
-
-    #-------------------------------------------------------------Website section -----
-
+    # A quick “about the site” explanation
     with st.container():
         st.write("---")
         left_col, right_col = st.columns(2)
         with left_col:
             st.header("Welcome to My Website 🌐")
-            st.write("###")
-            st.write("My goal in creating this website was to compile all of my skill sets and projects into a single, easy-to-navigate location that anyone can access. I hope you find it informative and inspiring. This way i can make everything about me accesible to anyone who wants to take a look with the click of a button. ")
             st.write(
-                "This was made my using streamlit and Python and deployed through Render.")
-        with right_col:
-            st_lottie(lottie_coding, height=400, key="coding")
-
-
-
-#------------------------------------------------------------- QUALIFICATIONS-------------------------------------
-if selected=="Qualifications":
-    #---Qualifications--
-    st.write("---")
-    with st.container():
-        left_col, right_col = st.columns(2)
-        with left_col:
-            st.header("⭐️ Qualifications & Certifications")
-            st.markdown("---")
-            
-            st_lottie(lottie_qual, height=400, key="qualification")
-            
-            
-        with right_col:
-            
-            st.subheader("✔️ Google Data Analytics Professional Certification")
-            st.write("Completed on March 2023")
-            st.markdown("***")
-            
-            st.subheader("✔️Master's in Mechatronics and Intelligent Machines")
-            st.write("University of Central Lancashire, preston")
-            st.write("Graduated with Distinction") 
-            st.write("JAN 2021 - JULY 2022")
-            st.markdown("***")
-            st.subheader("✔️Bachelor's in Mechatronics Engineering")
-            st.write("Nehru Institute of Engineering and Technology, Coimbatore, India")
-            st.write("Graduated with First class degree")
-            st.write("JUN 2016 - JUN 2020")
-            st.markdown("***")
-            st.subheader("✔️Deep Learning A-Z Hands-on Artificial Neural Network Completion Certificate from Udemy")
-            st.write("Completed the certification on Mar 2 2023.")
-            st.download_button(
-                label="Download Certificate ",
-                data=certificate,
-                file_name=resume_file,
-                mime="application/octet-stream",
-
+                "I created this space to share my skill sets, creative projects, "
+                "and overall journey with anyone curious. It’s all about easy access "
+                "and a friendly “hey, let’s collaborate!” vibe."
             )
-        
-#---------------------------------------------------------------- projects------------------------
-if selected =="Projects":
-    #-- Projects
-    
+            st.write(
+                "Built with :blue[Streamlit], :green[Python], and a dash of whimsy. "
+                "Deployed on Render for seamless sharing."
+            )
+        with right_col:
+            st_lottie(lottie_coding, height=300, key="coding")
 
+# --------------------- QUALIFICATIONS ---------------------
+if selected == "Qualifications":
+    st.write("---")
+    st.header("⭐️ Qualifications & Certifications")
+    st.write(
+        "Uh, here’s a snapshot of my educational journey and some certificates "
+        "I’ve proudly earned along the way."
+    )
+    st.write("##")
 
-    with st.container():
-        st.header("🤖 My Projects On Robotics ")
-        st.markdown("___")
-        st.subheader("1)")
+    left_col, right_col = st.columns(2)
+    with left_col:
+        # Another lottie for the qualifications
+        st_lottie(lottie_qual, height=400, key="qualification")
+
+    with right_col:
+        st.subheader("✔️ Google Data Analytics Professional Certification")
+        st.write("Completed on March 2023")
+        st.markdown("***")
+
+        st.subheader("✔️Master's in Mechatronics and Intelligent Machines")
+        st.write("University of Central Lancashire, Preston")
+        st.write("Graduated with Distinction")
+        st.write("JAN 2021 - JULY 2022")
+        st.markdown("***")
+
+        st.subheader("✔️Bachelor's in Mechatronics Engineering")
+        st.write("Nehru Institute of Engineering and Technology, Coimbatore, India")
+        st.write("Graduated with First class degree")
+        st.write("JUN 2016 - JUN 2020")
+        st.markdown("***")
+
+        st.subheader("✔️ Deep Learning A-Z Hands-on Artificial Neural Network (Udemy)")
+        st.write("Completed the certification on Mar 2 2023.")
+        st.download_button(
+            label="Download Certificate",
+            data=certificate,
+            file_name="certificate.pdf",
+            mime="application/octet-stream",
+        )
+
+# --------------------- PROJECTS ---------------------
+if selected == "Projects":
+    st.header("🤖 My Projects On Robotics")
+    st.write(
+        "These are some highlights of the work I’m most proud of. "
+        "I hope you find them as exciting as I do!"
+    )
+    st.markdown("---")
+
+    # 1) Face Orientation Based Wheelchair
+    st.subheader("1) Face Orientation Based Wheelchair Driving System")
+    img_col, text_col = st.columns((1, 2))
+    with img_col:
+        st.image(project_img1, use_column_width=True)
+    with text_col:
+        st.markdown(
+            "- This project utilizes Arduino robotic systems along with a "
+            "computer vision model for facial orientation checks. "
+            "The end goal was to help individuals with disabilities control "
+            "a wheelchair through facial orientation commands."
+        )
+        st.video("https://www.youtube.com/watch?v=sPwev6zheQM&t=17s")
+        if st.button("GitHub Repo for Face Orientation Project"):
+            webbrowser.open_new_tab(git_repo_url)
+
+    st.markdown("---")
+
+    # 2) Bionic Hand
+    st.subheader("2) Bionic Hand For Handicapped To Ride a Motorbike")
+    img_col2, text_col2 = st.columns((1, 2))
+    with img_col2:
+        st.image(project2_img, use_column_width=True)
+    with text_col2:
+        st.markdown(
+            "- As part of my undergrad in Mechatronics, we designed an exoskeleton "
+            "arm that straps onto the user’s bicep and controls the motorbike "
+            "accelerator using a servo motor. An accelerometer sensor helped "
+            "measure the bicep’s twist to determine acceleration inputs."
+        )
+        st.video("https://www.youtube.com/watch?v=qooHR-YLo5c")
+
+    st.markdown("---")
+
+    # 3) Warehouse Management System
+    st.subheader("3) Warehouse Management System Using 4DOF Robotic Arm")
+    img_col3, text_col3 = st.columns((1, 2))
+    with img_col3:
+        st.image(project3_img, use_column_width=True)
+    with text_col3:
+        st.markdown(
+            "- Collaborated during undergrad to create a 4DOF robotic arm "
+            "system that could identify, sort, and store products in a warehouse. "
+            "Each product had an RFID tag, and IR sensors helped locate free spaces. "
+            "The arm would pick and place items accordingly."
+        )
+        st.download_button(
+            label="Download the Warehouse Report",
+            data=open(warehouse_file, "rb").read(),
+            file_name="Warehouse_management_report.docx",
+            mime="application/octet-stream",
+        )
+
+    st.markdown("---")
+
+    # 4) Quadroped robot workshop
+    st.subheader("4) Workshop Project on a Quadruped Robot")
+    img_col4, text_col4 = st.columns((1, 2))
+    with img_col4:
+        st.image(project4_img, use_column_width=True)
+    with text_col4:
+        st.markdown(
+            "- During my early years, I participated in a workshop by SP Robotics Maker Lab. "
+            "I learned to build and program a quadruped robot, then attached a rotating brush "
+            "to create a mini-robotic cleaner. Super fun experience!"
+        )
+        st.video("https://www.youtube.com/watch?v=Cn-CBeOi3Cc")
+
+# --------------------- CONTACT ---------------------
+if selected == "Contact":
+    st.header("Get in Touch :handshake:")
+    st.write(
+        "Um, I'd be absolutely delighted to hear from you—whether it's about "
+        "a new project idea, collaboration, or just a friendly hello!"
+    )
+    st.write("##")
+    contact_col1, contact_col2 = st.columns((2, 1))
+
+    with contact_col1:
+        st.subheader("Send me an email")
+        st.write(
+            f":envelope: [Email me here](mailto:{EMAIL})\n\n"
+            "I usually respond within 24-48 hours."
+        )
         st.write("##")
-        img_column, text_column = st.columns((1, 2))
 
-        with img_column:
-            # Add your image here.
-            st.image(project_img1)
-
-            with text_column:
-                st.subheader("🏆 Face Orientation Based Wheelchair Driving System")
-            # Add your text and other content here.
-                st.markdown("- This project utilizes Arduino robotic systems that are integrated with a computer vision model to perform facial orientation checks. The arduino robotic car is provided with various facial orientation commands to move accordingly.The purpose of this model is to showcase a system that was proposed in my master's project, which could potentially be used in electric wheelchairs for individuals with disabilities.Additionally, the original project proposed an obstacle avoidance system using ultrasonic sensors, which is demonstrated on a small scale in this model.A 3D simulation was also made inorder to test the facial orientation system further in various environments and tested on diffrent faces. This simulation was done by using WeBots software. ")
-
-                st.video("https://www.youtube.com/watch?v=sPwev6zheQM&t=17s")
-                if st.button("GITHUB REPOSITORY FOR THIS PROJECT"):
-                    webbrowser.open_new_tab(git_repo_url)
-        st.markdown("___")
-        st.subheader("2)")
+        st.subheader("Connect with me on LinkedIn")
+        st.write(
+            f":arrow_right: [LinkedIn Profile]({social_media['LinkedIn']})"
+        )
         st.write("##")
-        img_column, text_column = st.columns((1, 2))
 
-        with img_column:
-            # Add your image here.
-            st.image(project2_img)
+        st.subheader("Check out my GitHub")
+        st.write(
+            f":computer: [GitHub Profile]({social_media['GitHub']})"
+        )
 
-            with text_column:
-                st.subheader("🏆 Bionic Hand For Handicapped To Ride a Motorbike")
-                st.markdown("- During my undergraduate studies in Mechatronics Engineering, I undertook a mini-project to design a Bionic arm that could be securely attached to the hand using straps. Our team successfully developed a design that could be mounted onto the original accelerator handle of a motorbike, with the exoskeleton's motion powered by a servo motor that was controlled by an Arduino system. To enable intuitive acceleration control, we incorporated an accelerometer sensor to detect the degree of twist of the bicep, which was then translated into acceleration commands and sent to the Arduino microcontroller for processing.")
-                st.video("https://www.youtube.com/watch?v=qooHR-YLo5c")
-        st.markdown("___")
-        st.subheader("3)")
-        st.write("##")
-        img_column, text_column = st.columns((1, 2))
+    with contact_col2:
+        # A sweet finishing animation
+        st_lottie(lottie_hi, height=250, key="say_hi")
 
-        with img_column:
-            # Add your image here.
-            st.image(project3_img)
-
-            with text_column:
-                st.subheader(
-                    "🏆 WareHouse Management System Using 4DOF Robotic Arm")
-                st.markdown(""" - This project was a collaborative effort among myself and fellow students during my undergraduate studies in Mechatronics. We recognized a challenge within the warehousing and ecommerce industries in regard to the time required to sort and store various products. Our solution to this problem was the implementation of a warehouse management system composed of 4-degree-of-freedom (4DOF) robotic arms that could handle the picking and placing of a wide range of products. Each product was equipped with a unique Radio Frequency Identification (RFID) tag for identification purposes. The sorting process began as products were placed onto a conveyor belt, where they were then scanned by an RFID scanner. The resulting signal was sent to an ARDUINO board for processing, which allocated space for the product in the warehouse. This was achieved by using infrared sensors placed in the storage areas to identify available space. The system then sent signals to the robotic arm to pick up and place the product in the correct location. To improve the efficiency of the system, we integrated a record and play system into the robot's hands, allowing operators to train the system according to their specific needs. The proposed system offers flexibility for use in various warehouses and storage spaces. """)
-                st.download_button(
-                    label="Download the report for this project here",
-                    data=PDFbyte,
-                    file_name=warehouse_file,
-                    mime="application/octet-stream",
-
-                )
-        st.markdown("___")
-        st.subheader("4)")
-        st.write("##")
-        img_column, text_column = st.columns((1, 2))
-
-        with img_column:
-            # Add your image here.
-            st.image(project4_img)
-
-            with text_column:
-                st.subheader("🏆 Workshop project on a Quadroped robot")
-                st.markdown(" - During my early years, I had the opportunity to participate in a project facilitated by SP Robotics Maker Lab, Edapally, Kerala. The primary objective of this workshop was to learn how to program and operate a quadruped robot. In order to receive a certificate, participants were required to complete a project utilizing the robot. I decided to attach a rotating brush to the front of the robot, effectively creating a mini-robotic cleaner. The key advantage of using a quadruped as a cleaning robot is the relatively small surface area it covers on the ground, compared to other types of cleaning robots. This design feature eliminates the need for a sweeper on the rear of the robot, which is often present in other types of cleaning robots. The robot kit used in this project included an Arduino controller, 3D printed robotic parts, 8 servo motors, and an ultrasonic sensor.")
-                st.markdown(
-                    "- It was really fun to play around with this quadroped robot :smile:.")
-                st.video("https://www.youtube.com/watch?v=Cn-CBeOi3Cc")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    st.write("##")
+    st.write(
+        "Thank you so much for dropping by! "
+        "Breathe, um, and have a wonderful day."
+    )
