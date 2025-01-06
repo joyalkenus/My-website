@@ -102,7 +102,7 @@ if selected == "Home":
         st.download_button(
             label="Take a look at my updated CV",
             data=PDFbyte,
-            file_name="NEW_JK_Resume.pdf",
+            file_name="JK_compact.pdf",
             mime="application/octet-stream",
         )
 
