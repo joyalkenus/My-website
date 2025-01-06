@@ -234,12 +234,7 @@ if selected == "Projects":
             "Each product had an RFID tag, and IR sensors helped locate free spaces. "
             "The arm would pick and place items accordingly."
         )
-        st.download_button(
-            label="Download the Warehouse Report",
-            data=open(warehouse_file, "rb").read(),
-            file_name="Warehouse_management_report.docx",
-            mime="application/octet-stream",
-        )
+
 
     st.markdown("---")
 
@@ -259,16 +254,7 @@ if selected == "Projects":
 # --------------------- EXPERIENCE (New Page) ---------------------
 if selected == "Experience":
     st.header("My Experience & Additional Details")
-    st.write("Um, let’s dive deeper into my background, shall we? Breathe...")
 
-    # -- Quick profile highlight
-    st.subheader("Profile")
-    st.write("**Joyal Kenus**")
-    st.write("Machine Learning Engineer")
-    st.write(f"**Phone**: {PHONE}")
-    st.write(f"**Email**: {EMAIL}")
-    st.write(f"**Address**: {ADDRESS}")
-    st.write(f"**LinkedIn**: {social_media['LinkedIn']}")
     st.write("---")
 
     # -- Summary
